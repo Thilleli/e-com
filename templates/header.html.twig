@@ -7,15 +7,22 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
-                    </li>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+                        </li>
+                    {% endif %}
+
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_admin') }}">Dashboard</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -23,6 +30,16 @@
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
+                <div>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li class="nav-item">
+                                <button class="btn" type="submit"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></button>
+                                
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
