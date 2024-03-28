@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('front') }}
+{% endblock %}
+
+{% block title %}Home DashBord{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+    {% for type, messages in app.flashes %}
+        <div class="alert alert-{{ type }}">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+<div class="example-wrapper">
+    {{ include('carroussel.html.twig') }}
+    <h1 class="example-primary">Bienvenue !</h1>
+
+    <p>Vous êtes sur la page d'accueil</p>
+</div>
+{% endblock %}

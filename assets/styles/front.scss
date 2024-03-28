@@ -1,0 +1,10 @@
+@import "bootstrap/scss/bootstrap.scss";
+
+$primary: #ff0000;
+
+h1{
+  color: $primary;
+}
+.page-content {
+  min-height: calc(100vh - 50px - 550px);
+}
