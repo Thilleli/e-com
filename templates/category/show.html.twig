@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+        <br>
+        <h3 class="text-center mb-4">Catégories</h3>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ category.namename }}</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <a href="{{ path('app_category_index') }}" class="btn btn-secondary">Retour à la liste</a>
+                <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="btn btn-primary">Modifier</a>
+                <a href="{{ path('app_category_delete', {'id': category.id}) }}" class="btn btn-danger">Supprimer</a>
+            </div>
+    </div>
+</div>
+    <br>
+{% endblock %}
