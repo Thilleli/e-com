@@ -3,11 +3,16 @@
 {% block title %}Edit Product{% endblock %}
 
 {% block body %}
-    <h1>Edit Product</h1>
+    <br>
+    <h3 class="text-center mb-4">Modifier la catégorie</h3>
 
     {{ include('product/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_product_index') }}">back to list</a>
-
-    {{ include('product/_delete_form.html.twig') }}
+<div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+        <a href="{{ path('app_product_index') }}" class="btn btn-secondary">Retour à la liste</a>
+        <a href="{{ path('app_product_delete', {'id': product.id}) }}" class="btn btn-danger">Supprimer</a>
+    </div>
+</div>
+    <br>
 {% endblock %}

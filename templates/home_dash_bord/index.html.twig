@@ -24,6 +24,18 @@
     {{ include('carroussel.html.twig') }}
     <h1 class="example-primary">Bienvenue !</h1>
 
-    <p>Vous êtes sur la page d'accueil</p>
+    <p>Nos Produits</p>
+
+    {% for product in products %}
+        <div class="card" style="width: 18rem;">
+            <img src="" class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.priceHT }} €</p>
+                <a href="" class="btn btn-primary">Voir détails</a>
+            </div>
+        </div>
+    {% endfor %}
+
 </div>
 {% endblock %}

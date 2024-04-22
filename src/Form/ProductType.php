@@ -4,8 +4,13 @@ namespace App\Form;
 
 use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\Category;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Taxes;
+
 
 class ProductType extends AbstractType
 {
@@ -14,8 +19,20 @@ class ProductType extends AbstractType
         $builder
             ->add('name')
             ->add('priceHT')
-            ->add('category')
-            ->add('taxes')
+            ->add('category',
+                EntityType::class, [
+                    'class' => Category::class,
+                    'choice_label' => 'namename',
+                ]
+            )
+            ->add('taxes', EntityType::class, [
+                'class' => Taxes::class,
+                'choice_label' => 'name',
+            ])
+            ->add('Stock')
+            ->add('imgName', HiddenType::class, [
+                'data' => 'default.jpg',
+            ])
         ;
     }
 
