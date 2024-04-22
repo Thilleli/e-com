@@ -19,8 +19,8 @@ class Taxes
     #[ORM\Column]
     private ?int $rate = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $wordwording = null;
+    #[ORM\Column]
+    private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'taxes', targetEntity: Product::class)]
     private Collection $products;
@@ -47,14 +47,14 @@ class Taxes
         return $this;
     }
 
-    public function getWordwording(): ?string
+    public function getName(): ?string
     {
-        return $this->wordwording;
+        return $this->name;
     }
 
-    public function setWordwording(?string $wordwording): static
+    public function setName(?string $name): static
     {
-        $this->wordwording = $wordwording;
+        $this->name = $name;
 
         return $this;
     }
