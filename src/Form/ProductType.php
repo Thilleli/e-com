@@ -10,6 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Taxes;
+use App\Entity\Images;
 
 
 class ProductType extends AbstractType
@@ -30,8 +31,9 @@ class ProductType extends AbstractType
                 'choice_label' => 'name',
             ])
             ->add('Stock')
-            ->add('imgName', HiddenType::class, [
-                'data' => 'default.jpg',
+            ->add('image',EntityType::class, [
+                'class' => Images::class,
+                'choice_label' => 'name',
             ])
         ;
     }

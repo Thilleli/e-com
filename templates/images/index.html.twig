@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Images index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <br>
+            <h3 class="text-center mb-4">Images</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Path</th>
+                        <th>Name</th>
+                        <th>Alt</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for image in images %}
+                    <tr>
+                        <td>{{ image.id }}</td>
+                        <td>{{ image.path }}</td>
+                        <td>{{ image.name }}</td>
+                        <td>{{ image.alt }}</td>
+                        <td>
+                            <a href="{{ path('app_images_show', {'id': image.id}) }}">afficher</a>
+                            <a href="{{ path('app_images_edit', {'id': image.id}) }}">modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">Aucune image trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ path('app_images_new') }}" class="btn btn-primary">Ajouter une image</a>
+        </div>
+    </div>
+</div><br>
+
+
+{% endblock %}
