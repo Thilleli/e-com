@@ -12,15 +12,32 @@
     <h1>Tableau de bord Admin</h1>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="card mt-5">
-                    <div class="card-header">
-                        Nombre d'utilisateurs inscrits
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ userCount }}</h5>
-                    </div>
+            <div class="card mt-5">
+                <div class="card-header">
+                    Nombre d'utilisateurs inscrits: {{ userCount }}
                 </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Téléphone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <th scope="row">{{ user.id }}</th>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.firstname }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phone }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
             </div>
         </div>
     </div>

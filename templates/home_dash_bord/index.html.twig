@@ -31,6 +31,7 @@
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text">{{ product.priceHT }} €</p>
                     <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-primary">Voir détails</a>
+                    <a href="{{ path('app_addtocart', {'idProduct': product.id}) }}" class="btn btn-primary">Ajouter au panier</a>
                 </div>
             </div>
             {% endfor %}

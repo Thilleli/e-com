@@ -3,28 +3,50 @@
 {% block title %}Cart{% endblock %}
 
 {% block body %}
-    <h1>Cart</h1>
+    <h1>Panier #{{ cart.id }}</h1>
+    {% if cart.save %}
+        <p>Panier enregistré: OUI</p> 
+    {% else %}
+        <p>Panier enregistré: NON</p>
+    {% endif %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ cart.id }}</td>
-            </tr>
-            <tr>
-                <th>Total</th>
-                <td>{{ cart.total }}</td>
-            </tr>
-            <tr>
-                <th>Save</th>
-                <td>{{ cart.save ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Produits</h5>
+                    <div class="row">
+                        {% for productCart in productCarts %}
+                            <div class="col-sm-4 mb-4">
+                                <div class="card">
+                                {% if productCart.product.image and productCart.product.image.path and productCart.product.image.alt %}
+                                    <img class="card-img-top" src="{{ productCart.product.image.path }}" alt="{{ productCart.product.image.alt }}">
+                                {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ productCart.product.name }}</h5>
+                                        <p class="card-text">{{ productCart.product.priceHt }} €</p>
+                                        <p class="card-text">Quantité X{{ productCart.quantity }}</p>
+                                        <a href="{{ path('app_removefromcart', {'productId': productCart.product.id, 'cartId': cart.id}) }}" class="btn btn-primary">Supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <a href="{{ path('app_cart_delete', {'id': cart.id}) }}" class="btn btn-primary">Vider le panier</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Paiement</h5>
+                    <p class="card-text">Total : {{ cart.total ?? '' }} €</p>
+                    <a href="#" class="btn btn-primary">Valider</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <a href="{{ path('app_cart_index') }}">back to list</a>
-
-    <a href="{{ path('app_cart_edit', {'id': cart.id}) }}">edit</a>
 
     {{ include('cart/_delete_form.html.twig') }}
 {% endblock %}

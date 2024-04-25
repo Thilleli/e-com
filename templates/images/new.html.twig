@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Images{% endblock %}
+
+{% block body %}
+
+
+    <br>
+    <h3 class="text-center mb-4">Ajouter une image</h3>
+
+    {{ include('images/_form.html.twig') }}
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <a href="{{ path('app_images_index') }}" class="btn btn-secondary">Retour à la liste</a>
+        </div>
+    </div>
+    <br>    
+{% endblock %}
