@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
@@ -77,5 +78,16 @@ class ProductController extends AbstractController
         }
 
         return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/product/category/{id}', name: 'app_product_by_category', methods: ['GET'])]
+    public function productsByCategory(Category $category, ProductRepository $productRepository): Response
+    {
+        $products = $productRepository->findBy(['category' => $category]);
+
+        return $this->render('product/products_by_category.html.twig', [
+            'category' => $category,
+            'products' => $products,
+        ]);
     }
 }

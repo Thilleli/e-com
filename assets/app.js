@@ -11,4 +11,4 @@
 
 import * as bootstrap from 'bootstrap';
 
-sdfyu
+import './styles/front.scss';

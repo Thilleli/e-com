@@ -4,38 +4,45 @@
 
 {% block body %}
     <br>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="container">
+        <br>
+        <div>
+            <a href="{{ path('app_product_by_category', {'id': product.category.id}) }}" class="breadcrumb_cat">
+                {{ product.category.namename }}
+            </a>
+            <span class="breadcrumb_prod">/ {{ product.name }}</span>
+        </div>
+        <div class="row_product">
+            <div class="col-md-4">
+                <img src="https://www.sephora.fr/dw/image/v2/BCVW_PRD/on/demandware.static/-/Sites-masterCatalog_Sephora/default/dw7f2a9cfe/images/hi-res/SKU/SKU_5360/728055_swatch.jpeg?sw=585&sh=585&sm=fit" class="img-fluid" alt="">
+            </div>
+            <div class="col-md-4">
+                <br>
+                <div class="product-title-wrapper">
+                    <p>TestMarque</p>
+                    <h3 class="mb-4">{{ product.name }}</h3>
+                </div>
+                <div class="product-content">
+                    <p><strong>Catégorie :</strong> {{ product.category.namename }}</p>
+                    <p>Miss Dior Eau de Parfum s'habille en édition limitée d'un coffret orné d'une flore dorée...</p>
+                    <p><strong>{{ product.priceHT }} €</strong></p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <a href="" class="btn btn-primary"> Ajouter au panier</a>
+                </div>
+            </div>
+        </div>
+        <br>
 
-            <br>
-            <h3 class="text-center mb-4">Catégories</h3>
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <th>Nom</th>
-                        <td>{{ product.name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Prix</th>
-                        <td>{{ product.priceHT }}</td>
-                    </tr>
-                    <tr>
-                        <th>Quantité en stock</th>
-                        <td>{{ product.stock }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <a href="{{ path('app_product_index') }}" class="btn btn-secondary">Retour à la liste</a>
+                    <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-primary">Modifier le produit</a>
+                    <a href="{{ path('app_product_delete', {'id': product.id}) }}" class="btn btn-danger">Supprimer le produit</a>
+                </div>
+            </div>
+        {% endif %}
+        <br>
     </div>
-    <br>
-    <div class="row justify-content-center">
-        <div class="col-md-6 text-center">
-            <a href="{{ path('app_product_index') }}" class="btn btn-secondary">Retour à la liste</a>
-            <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-primary">Modifier le produit</a>
-            <a href="{{ path('app_product_delete', {'id': product.id}) }}" class="btn btn-danger">Supprimer le produit</a>
-        </div>
-    </div>
-    <br>
-</div>
 {% endblock %}
