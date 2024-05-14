@@ -8,3 +8,54 @@ h1{
 .page-content {
   min-height: calc(100vh - 50px - 550px);
 }
+
+.example-wrapper {
+  margin: 1em auto;
+  max-width: 100%;
+  width: 95%;
+  font: 18px/1.5 sans-serif;
+}
+
+.example-wrapper code {
+  background: #F5F5F5;
+  padding: 2px 6px;
+}
+
+.carousel {
+  width: 100%;
+}
+
+.product-container {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  margin: auto;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: #d0c1e4;
+  border-color: #d0c1e4;
+}
+
+.title-primary {
+  color: #e7a798;
+  font-family: AvantGardeBold, Arial, sans-serif;
+  margin: 3%;
+  font-weight: bold;
+}
+
+.breadcrumb_cat {
+  text-decoration: none;
+  color: black;
+}
+
+.breadcrumb_prod {
+  font-weight: bold;
+}
+
+.row_product {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
