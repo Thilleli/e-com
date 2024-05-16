@@ -22,6 +22,15 @@ class File
     #[ORM\Column(nullable: true)]
     private ?bool $public = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Product $product = null;
+
+    #[ORM\OneToOne(inversedBy: 'file', cascade: ['persist', 'remove'])]
+    private ?Category $category = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $path = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +68,42 @@ class File
     public function setPublic(?bool $public): static
     {
         $this->public = $public;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): static
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getPath(): ?string
+    {
+        return $this->path;
+    }
+
+    public function setPath(string $path): static
+    {
+        $this->path = $path;
 
         return $this;
     }

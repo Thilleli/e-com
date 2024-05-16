@@ -36,6 +36,12 @@ class Product
     #[ORM\Column(nullable: true)]
     private ?int $Stock = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $marque = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?File $fileName = null;
+
     public function __construct()
     {
         $this->commandLines = new ArrayCollection();
@@ -175,6 +181,30 @@ class Product
     public function setImage(?Images $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getMarque(): ?string
+    {
+        return $this->marque;
+    }
+
+    public function setMarque(?string $marque): static
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
+    public function getFileName(): ?File
+    {
+        return $this->fileName;
+    }
+
+    public function setFileName(?File $fileName): static
+    {
+        $this->fileName = $fileName;
 
         return $this;
     }
