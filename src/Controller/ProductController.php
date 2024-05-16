@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\File;
 use App\Entity\Product;
 use App\Entity\Cart;
 use App\Entity\ProductCart;
@@ -10,6 +11,7 @@ use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use App\Repository\CartRepository;
 use App\Repository\ProductCartRepository;
+use App\Service\ImagesManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,13 +30,27 @@ class ProductController extends AbstractController
     }
 
     #[Route('/new', name: 'app_product_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, ImagesManager $imageManager): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
+        $file = new File();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $uploadedFile = $form->get('fileName')->getData();
+            $file->setPublic(true);
+            $fileName = $imageManager->upload($uploadedFile, $file->isPublic());
+
+            $file->setPath($fileName);
+            $file->setType('image');
+            $file->setFileName($uploadedFile->getClientOriginalName());
+
+            $product->setFileName($file);
+
+            $entityManager->persist($file);
+
             $entityManager->persist($product);
             $entityManager->flush();
 

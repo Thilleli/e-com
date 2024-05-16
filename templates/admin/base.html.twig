@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}base{% endblock %}</title>
+
+        {{ encore_entry_link_tags('front') }}
+        {{ encore_entry_script_tags('app') }}
+
+        {% block stylesheets %}
+        {% endblock %}
+    </head>
+    <body>
+            {{ include('header.html.twig') }}
+            <div class="page-content">
+                
+                {% block content %}{% endblock %}
+                {{ include('footer.html.twig') }}
+            </div>
+    </body>
+</html>

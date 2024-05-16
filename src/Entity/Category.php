@@ -16,10 +16,13 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $namename = null;
+    private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
     private Collection $products;
+
+    #[ORM\OneToOne(mappedBy: 'category', cascade: ['persist', 'remove'])]
+    private ?File $fileName = null;
 
     public function __construct()
     {
@@ -31,14 +34,14 @@ class Category
         return $this->id;
     }
 
-    public function getNamename(): ?string
+    public function getName(): ?string
     {
-        return $this->namename;
+        return $this->name;
     }
 
-    public function setNamename(string $namename): static
+    public function setName(string $name): static
     {
-        $this->namename = $namename;
+        $this->name = $name;
 
         return $this;
     }
@@ -69,6 +72,28 @@ class Category
                 $product->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFileName(): ?File
+    {
+        return $this->fileName;
+    }
+
+    public function setFileName(?File $fileName): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($fileName === null && $this->fileName !== null) {
+            $this->fileName->setCategory(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($fileName !== null && $fileName->getCategory() !== $this) {
+            $fileName->setCategory($this);
+        }
+
+        $this->fileName = $fileName;
 
         return $this;
     }

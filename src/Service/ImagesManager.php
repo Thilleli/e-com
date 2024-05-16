@@ -3,14 +3,14 @@
 namespace App\Service;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-class ImageManager
+class ImagesManager
 {
     protected $targetDirectory;
     protected $subDirectory = "/images";
 
-    public function _construct($directory)
+    public function __construct($sharedDirectory)
     {
-        $this->targetDirectory = $directory;
+        $this->targetDirectory = $sharedDirectory;
     }
 
     public function getTargetDirectory(): string
@@ -34,16 +34,17 @@ class ImageManager
         $fileName = null;
         // $file_exists($this->targetDirectory."".$this->subDirectory.'/'.$fileName);
 //dd($this->getDirectory($public));
+//        dd($this->targetDirectory, $this->getDirectory($public), __DIR__);
         if (file_exists($this->getDirectory($public)) === false){
-            mkdir($this->getDirectory($public), 0777, true);
+            mkdir($this->getDirectory($public), 0755, true);
         }
 
         $count = 0;
 
         while($count < 10 && $fileName == null || file_exists($this->getDirectory($public).'/'.$fileName)) {
             $fileName = md5($file->getClientOriginalName()).
-                ''.
-                strreplace('.','',uniqid('',true)).
+                str_replace('.','',uniqid('',true)).
+                '.'.
                 $file->guessExtension();
             $count ++;
         }

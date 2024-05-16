@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produits de la catégorie {{ category.namename }}{% endblock %}
+{% block title %}Produits de la catégorie {{ category.name }}{% endblock %}
 
 {% block body %}
-    <h3 class="title-primary">Produits de la catégorie {{ category.namename }} </h3>
+    <h3 class="title-primary">Produits de la catégorie {{ category.name }} </h3>
     <div class="row_product">
         <div class="product-container">
             {% for product in products %}
