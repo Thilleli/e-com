@@ -36,9 +36,6 @@ class Product
     #[ORM\Column(nullable: true)]
     private ?int $Stock = null;
 
-    #[ORM\ManyToOne(inversedBy: 'products')]
-    private ?Images $image = null;
-
     public function __construct()
     {
         $this->commandLines = new ArrayCollection();
