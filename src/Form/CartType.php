@@ -6,6 +6,9 @@ use App\Entity\Cart;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 
 class CartType extends AbstractType
 {
@@ -14,7 +17,10 @@ class CartType extends AbstractType
         $builder
             ->add('total')
             ->add('save')
-            ->add('user')
+            ->add('user', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'name',
+            ])
         ;
     }
 

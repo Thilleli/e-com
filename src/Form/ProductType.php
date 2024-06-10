@@ -30,9 +30,6 @@ class ProductType extends AbstractType
                 'choice_label' => 'name',
             ])
             ->add('Stock')
-            ->add('imgName', HiddenType::class, [
-                'data' => 'default.jpg',
-            ])
         ;
     }
 

@@ -15,6 +15,20 @@
             </tr>
         </thead>
         <tbody>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_USER')  and carts %}
+            {% for cart in carts %}
+                <tr>
+                    <td>{{ cart.id }}</td>
+                    <td>{{ cart.total }}</td>
+                    <td>{{ cart.save ? 'Yes' : 'No' }}</td>
+                    <td>
+                        <a href="{{ path('app_cart_show', {'id': cart.id}) }}">show</a>
+                        <a href="{{ path('app_cart_edit', {'id': cart.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        --------------------------------------------------------
         {% for cart in carts %}
             <tr>
                 <td>{{ cart.id }}</td>

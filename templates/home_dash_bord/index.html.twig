@@ -22,20 +22,20 @@
     </div>
 
     <h3 class="title-primary">Nos Produits </h3>
-
-    <div class="product-container">
-        {% for product in products %}
-        <div class="card" style="width: 18rem;">
-            <img src="https://www.sephora.fr/dw/image/v2/BCVW_PRD/on/demandware.static/-/Sites-masterCatalog_Sephora/default/dw7f2a9cfe/images/hi-res/SKU/SKU_5360/728055_swatch.jpeg?sw=585&sh=585&sm=fit" class="card-img-top" alt="">
-            <div class="card-body">
-                <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">{{ product.priceHT }} €</p>
-                <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-primary">Voir détails</a>
+    <div class="row_product">
+        <div class="product-container">
+            {% for product in products %}
+            <div class="card" style="width: 18rem;">
+                <img src="https://www.sephora.fr/dw/image/v2/BCVW_PRD/on/demandware.static/-/Sites-masterCatalog_Sephora/default/dw7f2a9cfe/images/hi-res/SKU/SKU_5360/728055_swatch.jpeg?sw=585&sh=585&sm=fit" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.priceHT }} €</p>
+                    <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-primary">Voir détails</a>
+                    <a href="{{ path('app_addtocart', {'idProduct': product.id}) }}" class="btn btn-primary">Ajouter au panier</a>
+                </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-
-
 </div>
 {% endblock %}

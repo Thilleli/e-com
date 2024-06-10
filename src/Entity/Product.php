@@ -33,9 +33,6 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductCart::class)]
     private Collection $productCarts;
 
-    #[ORM\Column(length: 255)]
-    private ?string $ImgName = null;
-
     #[ORM\Column(nullable: true)]
     private ?int $Stock = null;
 
@@ -158,18 +155,6 @@ class Product
         return $this;
     }
 
-    public function getImgName(): ?string
-    {
-        return $this->ImgName;
-    }
-
-    public function setImgName(string $ImgName): static
-    {
-        $this->ImgName = $ImgName;
-
-        return $this;
-    }
-
     public function getStock(): ?int
     {
         return $this->Stock;
@@ -178,6 +163,18 @@ class Product
     public function setStock(?int $Stock): static
     {
         $this->Stock = $Stock;
+
+        return $this;
+    }
+
+    public function getImage(): ?Images
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Images $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }
